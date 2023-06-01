@@ -1,7 +1,21 @@
+import { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
+  const [people, setPeople] = useState([]);
+
+  useEffect(() => {
+    Axios.get("https://dryexpress.herokuapp.com/readUser")
+      .then((res) => {
+        setPeople(res.data);
+        console.log("test");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,7 +32,9 @@ function App() {
           Learn React
         </a>
       </header>
-      <span>ok</span>
+      {people.map((item) => {
+        return <div>{item.name}</div>;
+      })}
     </div>
   );
 }
