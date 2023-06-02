@@ -12,6 +12,8 @@ function App() {
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
   const [scanResults, setScanResults] = useState(null);
+  const [userId, setUserId] = useState("");
+  const [getuserInfo, setGetUserInfo] = useState("");
 
   useEffect(() => {
     Axios.get("https://dryexpress.herokuapp.com/readUser")
@@ -24,28 +26,28 @@ function App() {
       });
   }, []);
 
-  useEffect(() => {
-    const scanner = new Html5QrcodeScanner("reader", {
-      qrbox: {
-        width: 250,
-        height: 250,
-      },
-      fps: 5,
-    });
+  // useEffect(() => {
+  //   const scanner = new Html5QrcodeScanner("reader", {
+  //     qrbox: {
+  //       width: 250,
+  //       height: 250,
+  //     },
+  //     fps: 5,
+  //   });
 
-    scanner.render(success, error);
+  //   scanner.render(success, error);
 
-    function success(result) {
-      scanner.clear();
-      setScanResults(result);
-    }
+  //   function success(result) {
+  //     scanner.clear();
+  //     setScanResults(result);
+  //   }
 
-    function error() {
-      console.log(error);
-    }
+  //   function error() {
+  //     console.log(error);
+  //   }
 
-    scanner.render();
-  }, []);
+  //   scanner.render();
+  // }, []);
 
   const addUser = () => {
     console.log("test");
@@ -57,6 +59,22 @@ function App() {
       console.log(err);
     });
   };
+
+  const sendUserId = () => {
+    Axios.get(`https://dryexpress.herokuapp.com/users/${userId}`)
+      .then((response) => {
+        console.log(response.data); // Handle the response data
+      })
+      .catch((error) => {
+        console.error(error); // Handle any errors
+      });
+  };
+
+  // const getUserInfo = () => {
+  //   Axios.get("http://dryexpress.herokuapp.com/getUserInfo")
+  //     .then((res) => {})
+  //     .catch((err) => {});
+  // };
 
   return (
     <div className="App">
@@ -99,7 +117,16 @@ function App() {
           );
         })}
       </div>
-      <div id="reader"></div>
+      {/* <div id="reader"></div> */}
+      <div>
+        Test Id's
+        <input
+          onChange={(e) => {
+            setUserId(e.target.value);
+          }}
+        />
+        <button onClick={sendUserId}>Check Id</button>
+      </div>
     </div>
   );
 }
