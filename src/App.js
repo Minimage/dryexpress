@@ -1,12 +1,16 @@
-import { useState, useEffect } from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import logo from "./logo.svg";
+
 import Axios from "axios";
+import QRCode from "react-qr-code";
+import { useState, useEffect } from "react";
+import { Html5QrcodeScanner } from "html5-qrcode";
 
 function App() {
   const [people, setPeople] = useState([]);
-  const [firstName, setFirstName] = useState("ok");
-  const [lastName, setLastName] = useState("ok");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [scanResults, setScanResults] = useState(null);
 
   useEffect(() => {
     Axios.get("https://dryexpress.herokuapp.com/readUser")
@@ -19,7 +23,31 @@ function App() {
       });
   }, []);
 
+  useEffect(() => {
+    const scanner = new Html5QrcodeScanner("reader", {
+      qrbox: {
+        width: 250,
+        height: 250,
+      },
+      fps: 5,
+    });
+
+    scanner.render(success, error);
+
+    function success(result) {
+      scanner.clear();
+      setScanResults(result);
+    }
+
+    function error() {
+      console.log(error);
+    }
+
+    scanner.render();
+  }, []);
+
   const addUser = () => {
+    console.log("test");
     Axios.post("https://dryexpress.herokuapp.com/create", {
       firstName: firstName,
       lastName: lastName,
@@ -40,23 +68,28 @@ function App() {
           }}
           type="text"
         />
-        <label
+        <label>Last Name</label>
+        <input
           onChange={(e) => {
             setLastName(e.target.value);
           }}
-        >
-          Last Name
-        </label>
-        <input onClick={addUser} type="text" />
+          type="text"
+        />
 
-        <button>Create User</button>
+        <button onClick={addUser}>Create User</button>
       </div>
       <div>
         <h2>Users</h2>
         {people.map((item) => {
-          return <div>{item.firstName}</div>;
+          const test = <QRCode size={120} value={item._id} />;
+          return (
+            <div className="user">
+              {item.firstName} {test}
+            </div>
+          );
         })}
       </div>
+      <div id="reader"></div>
     </div>
   );
 }
