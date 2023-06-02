@@ -61,7 +61,7 @@ function App() {
   return (
     <div className="App">
       test
-      <div>
+      <div className="create">
         <h2>Create User</h2>
         <label>First Name</label>
         <input
@@ -78,11 +78,13 @@ function App() {
           type="text"
         />
 
+        <label>Address</label>
         <input
           onChange={(e) => {
             setAddress(e.target.value);
           }}
         />
+        {address}
 
         <button onClick={addUser}>Create User</button>
       </div>

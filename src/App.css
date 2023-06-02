@@ -42,3 +42,15 @@
 .user {
   margin: 50px;
 }
+
+.create {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  margin: 0 auto;
+}
+
+.create>input {
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
