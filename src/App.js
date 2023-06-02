@@ -10,6 +10,7 @@ function App() {
   const [people, setPeople] = useState([]);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [address, setAddress] = useState("");
   const [scanResults, setScanResults] = useState(null);
 
   useEffect(() => {
@@ -51,6 +52,7 @@ function App() {
     Axios.post("https://dryexpress.herokuapp.com/create", {
       firstName: firstName,
       lastName: lastName,
+      address: address,
     }).catch((err) => {
       console.log(err);
     });
@@ -74,6 +76,12 @@ function App() {
             setLastName(e.target.value);
           }}
           type="text"
+        />
+
+        <input
+          onChange={(e) => {
+            setAddress(e.target.value);
+          }}
         />
 
         <button onClick={addUser}>Create User</button>
