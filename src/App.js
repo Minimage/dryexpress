@@ -70,6 +70,12 @@ function App() {
       });
   };
 
+  const createOrder = () => {
+    Axios.post("http://dryexpress.herokuapp.com/createOrder", {
+      userId: userId,
+    });
+  };
+
   // const getUserInfo = () => {
   //   Axios.get("http://dryexpress.herokuapp.com/getUserInfo")
   //     .then((res) => {})
@@ -125,7 +131,7 @@ function App() {
             setUserId(e.target.value);
           }}
         />
-        <button onClick={sendUserId}>Check Id</button>
+        <button onClick={createOrder}>Check Id</button>
       </div>
     </div>
   );
