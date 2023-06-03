@@ -39,7 +39,7 @@ function App() {
 
     scanner.render(success, error);
 
-    function success(result) {
+    const success = (result) => {
       setScanResults(JSON.stringify(result));
       scanner.clear();
 
@@ -48,7 +48,7 @@ function App() {
         userId: result.userId,
       });
       // }
-    }
+    };
 
     function error() {
       console.log(error);
