@@ -16,6 +16,17 @@ function App() {
   const [getuserInfo, setGetUserInfo] = useState("");
 
   useEffect(() => {
+    Axios.get("https://dryexpress.herokuapp.com/readUser")
+      .then((res) => {
+        console.log(res.data);
+        setPeople(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
     const scanner = new Html5QrcodeScanner("reader", {
       qrbox: {
         width: 250,
@@ -51,6 +62,8 @@ function App() {
         });
     }
   }, [scanResults]);
+
+  // Rest of your code...
 
   const addUser = () => {
     console.log("test");
