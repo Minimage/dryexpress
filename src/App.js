@@ -117,7 +117,7 @@ function App() {
   useEffect(() => {
     if (scanResults !== null) {
       Axios.post("https://dryexpress.herokuapp.com/createOrder", {
-        scanResults: scanResults,
+        userId: scanResults,
       })
         .then((response) => {})
         .catch((error) => {
