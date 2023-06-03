@@ -40,7 +40,7 @@ function App() {
     scanner.render(success, error);
 
     function success(result) {
-      setScanResults(result);
+      setScanResults(JSON.stringify(result));
       scanner.clear();
 
       // if (scanResults != null) {
@@ -133,7 +133,7 @@ function App() {
           }}
         />
         <div id="reader"></div>
-        {JSON.stringify(scanResults)}
+        {scanResults}
       </div>
     </div>
   );
