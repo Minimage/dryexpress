@@ -112,6 +112,20 @@ function App() {
   //     .catch((err) => {});
   // };
 
+  useEffect(() => {
+    if (scanResults !== null) {
+      Axios.post("https://dryexpress.herokuapp.com/createOrder", {
+        scanResults: scanResults,
+      })
+        .then((response) => {
+          console.log(response.data); // Handle the response data
+        })
+        .catch((error) => {
+          console.error(error); // Handle any errors
+        });
+    }
+  }, [scanResults]);
+
   return (
     <div className="App">
       test
