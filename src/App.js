@@ -38,14 +38,20 @@ function App() {
 
     scanner.render(success, error);
 
-    function success(result) {
+    async function success(result) {
       scanner.clear();
       setScanResults(result);
       setTest(result);
-      Axios.post("https://dryexpress.herokuapp.com/createOrder", {
-        userId: result,
-      });
+
+      try {
+        await Axios.post("https://dryexpress.herokuapp.com/createOrder", {
+          userId: result,
+        });
+      } catch (error) {
+        console.error(error);
+      }
     }
+
     function error(err) {
       console.log(err);
     }
