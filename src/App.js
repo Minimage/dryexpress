@@ -11,7 +11,7 @@ function App() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
-  const [scanResults, setScanResults] = useState("647aceb8e3dbdd850b13eb54");
+  const [scanResults, setScanResults] = useState(null);
   const [userId, setUserId] = useState("");
   const [getuserInfo, setGetUserInfo] = useState("");
 
@@ -41,29 +41,49 @@ function App() {
       scanner.clear();
       setScanResults(result);
     }
-
-    function error() {
-      console.log(error);
+    function error(err) {
+      console.log(err);
     }
+  }, []);
 
-    scanner.render();
-  });
+  // useEffect(() => {
+  //   const scanner = new Html5QrcodeScanner("reader", {
+  //     qrbox: {
+  //       width: 250,
+  //       height: 250,
+  //     },
+  //     fps: 5,
+  //   });
 
-  useEffect(() => {
-    if (scanResults !== null) {
-      Axios.post("http://dryexpress.herokuapp.com/createOrder", {
-        userId: scanResults.userId,
-      })
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  }, [scanResults]);
+  //   scanner.render(success, error);
 
-  // Rest of your code...
+  //   function success(result) {
+  //     scanner.clear();
+  //     setScanResults(result);
+  //   }
+
+  //   function error() {
+  //     console.log(error);
+  //   }
+
+  //   scanner.render();
+  // });
+
+  // useEffect(() => {
+  //   if (scanResults !== null) {
+  //     Axios.post("http://dryexpress.herokuapp.com/createOrder", {
+  //       userId: scanResults.userId,
+  //     })
+  //       .then((response) => {
+  //         console.log(response.data);
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //       });
+  //   }
+  // }, [scanResults]);
+
+  // // Rest of your code...
 
   const addUser = () => {
     console.log("test");
@@ -140,9 +160,9 @@ function App() {
             setUserId(e.target.value);
           }}
         />
-        <div id="reader"></div>
         {scanResults}
       </div>
+      {scanResults ? <div>{scanResults}</div> : <div id="reader"></div>}
     </div>
   );
 }
