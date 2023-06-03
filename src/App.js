@@ -15,19 +15,6 @@ function App() {
   const [userId, setUserId] = useState("");
   const [getuserInfo, setGetUserInfo] = useState("");
 
-  useEffect(() => {}, [scanResults]);
-
-  useEffect(() => {
-    Axios.get("https://dryexpress.herokuapp.com/readUser")
-      .then((res) => {
-        console.log(res.data);
-        setPeople(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
   useEffect(() => {
     const scanner = new Html5QrcodeScanner("reader", {
       qrbox: {
@@ -41,15 +28,7 @@ function App() {
 
     function success(result) {
       scanner.clear();
-
-      setScanResults((prevScanResults) => {
-        // Use the previous state to update the new value
-        return result;
-      });
-
-      Axios.post("http://dryexpress.herokuapp.com/createOrder", {
-        userId: result.userId,
-      });
+      setScanResults(result);
     }
 
     function error() {
@@ -58,6 +37,20 @@ function App() {
 
     scanner.render();
   }, []);
+
+  useEffect(() => {
+    if (scanResults !== null) {
+      Axios.post("http://dryexpress.herokuapp.com/createOrder", {
+        userId: scanResults.userId,
+      })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [scanResults]);
 
   const addUser = () => {
     console.log("test");
