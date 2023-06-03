@@ -15,13 +15,7 @@ function App() {
   const [userId, setUserId] = useState("");
   const [getuserInfo, setGetUserInfo] = useState("");
 
-  useEffect(() => {
-    if (scanResults != null) {
-      Axios.post("http://dryexpress.herokuapp.com/createOrder", {
-        userId: scanResults,
-      });
-    }
-  }, [scanResults]);
+  useEffect(() => {}, [scanResults]);
 
   useEffect(() => {
     Axios.get("https://dryexpress.herokuapp.com/readUser")
@@ -48,6 +42,12 @@ function App() {
     function success(result) {
       scanner.clear();
       setScanResults(result);
+
+      // if (scanResults != null) {
+      Axios.post("http://dryexpress.herokuapp.com/createOrder", {
+        userId: result,
+      });
+      // }
     }
 
     function error() {
