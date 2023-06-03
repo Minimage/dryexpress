@@ -19,10 +19,11 @@ function App() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    Axios.get("https://your-api.com/orders")
+    Axios.get("https://dryexpress.herokuapp.com/orders")
       .then((response) => {
         const data = response.data;
         setOrders(data);
+        console.log(data); // Check the received data in the browser console
       })
       .catch((error) => {
         console.error(error);
@@ -40,38 +41,38 @@ function App() {
       });
   }, []);
 
-  useEffect(() => {
-    const scanner = new Html5QrcodeScanner("reader", {
-      qrbox: {
-        width: 250,
-        height: 250,
-      },
-      fps: 5,
-    });
+  // useEffect(() => {
+  //   const scanner = new Html5QrcodeScanner("reader", {
+  //     qrbox: {
+  //       width: 250,
+  //       height: 250,
+  //     },
+  //     fps: 5,
+  //   });
 
-    scanner.render(success, error);
+  //   scanner.render(success, error);
 
-    async function success(result) {
-      scanner.clear();
-      setScanResults(result);
-      setTest(result);
+  //   async function success(result) {
+  //     scanner.clear();
+  //     setScanResults(result);
+  //     setTest(result);
 
-      try {
-        await Axios.post(
-          `https://dryexpress.herokuapp.com/createOrder?userId=${result}`,
-          {
-            userId: result,
-          }
-        );
-      } catch (error) {
-        console.error(error);
-      }
-    }
+  //     try {
+  //       await Axios.post(
+  //         `https://dryexpress.herokuapp.com/createOrder?userId=${result}`,
+  //         {
+  //           userId: result,
+  //         }
+  //       );
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
 
-    function error(err) {
-      console.log(err);
-    }
-  }, []);
+  //   function error(err) {
+  //     console.log(err);
+  //   }
+  // }, []);
 
   // useEffect(() => {
   //   const scanner = new Html5QrcodeScanner("reader", {
