@@ -44,9 +44,12 @@ function App() {
       setTest(result);
 
       try {
-        await Axios.post("https://dryexpress.herokuapp.com/createOrder", {
-          userId: result,
-        });
+        await Axios.post(
+          `https://dryexpress.herokuapp.com/createOrder${result}`,
+          {
+            userId: result,
+          }
+        );
       } catch (error) {
         console.error(error);
       }
