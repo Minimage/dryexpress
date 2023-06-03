@@ -47,7 +47,7 @@ function App() {
     }
 
     scanner.render();
-  }, []);
+  });
 
   useEffect(() => {
     if (scanResults !== null) {
