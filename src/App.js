@@ -177,7 +177,7 @@ function App() {
         {scanResults}
       </div>
       {scanResults ? <div>{scanResults}</div> : <div id="reader"></div>}
-      {test ? JSON.stringify(test) : "this is test"}
+      {test ? test : "this is test"}
     </div>
   );
 }
