@@ -1,5 +1,6 @@
 import "./App.css";
 import logo from "./logo.svg";
+import { Login } from "./Components/Login";
 
 import Axios from "axios";
 import QRCode from "react-qr-code";
@@ -140,6 +141,7 @@ function App() {
 
   return (
     <div className="App">
+      <Login />
       test
       <div className="create">
         <h2>Create User</h2>
