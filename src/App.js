@@ -39,16 +39,18 @@ function App() {
 
     scanner.render(success, error);
 
-    const success = (result) => {
-      setScanResults(JSON.stringify(result));
+    function success(result) {
       scanner.clear();
 
-      // if (scanResults != null) {
-      Axios.post("https://dryexpress.herokuapp.com/createOrder", {
+      setScanResults((prevScanResults) => {
+        // Use the previous state to update the new value
+        return result;
+      });
+
+      Axios.post("http://dryexpress.herokuapp.com/createOrder", {
         userId: result.userId,
       });
-      // }
-    };
+    }
 
     function error() {
       console.log(error);
