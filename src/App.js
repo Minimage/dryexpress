@@ -202,13 +202,15 @@ function App() {
         />
       </div>
       {scanResults ? <div>{scanResults}</div> : <div id="reader"></div>}
-      {orders.map((order) => (
-        <div key={order._id}>
-          <p>First Name: {order.firstName}</p>
-          <p>Last Name: {order.lastName}</p>
-          <p>Date and Time: {order.formattedDateTime}</p>
-        </div>
-      ))}
+      {orders
+        ? orders.map((order) => (
+            <div key={order._id}>
+              <p>First Name: {order.firstName}</p>
+              <p>Last Name: {order.lastName}</p>
+              <p>Date and Time: {order.formattedDateTime}</p>
+            </div>
+          ))
+        : ""}
     </div>
   );
 }
