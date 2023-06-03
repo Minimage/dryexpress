@@ -16,6 +16,18 @@ function App() {
   const [userId, setUserId] = useState("");
   const [getuserInfo, setGetUserInfo] = useState("");
   const [test, setTest] = useState("");
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    Axios.get("https://your-api.com/orders")
+      .then((response) => {
+        const data = response.data;
+        setOrders(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   useEffect(() => {
     Axios.get("https://dryexpress.herokuapp.com/readUser")
@@ -188,10 +200,15 @@ function App() {
             setUserId(e.target.value);
           }}
         />
-        {scanResults}
       </div>
       {scanResults ? <div>{scanResults}</div> : <div id="reader"></div>}
-      {test ? test : "this is test"}
+      {orders.map((order) => (
+        <div key={order._id}>
+          <p>First Name: {order.firstName}</p>
+          <p>Last Name: {order.lastName}</p>
+          <p>Date and Time: {order.formattedDateTime}</p>
+        </div>
+      ))}
     </div>
   );
 }
