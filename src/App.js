@@ -16,9 +16,11 @@ function App() {
   const [getuserInfo, setGetUserInfo] = useState("");
 
   useEffect(() => {
-    Axios.post("http://dryexpress.herokuapp.com/createOrder", {
-      userId: scanResults,
-    });
+    if (scanResults != null) {
+      Axios.post("http://dryexpress.herokuapp.com/createOrder", {
+        userId: scanResults,
+      });
+    }
   }, scanResults);
 
   useEffect(() => {
@@ -123,7 +125,6 @@ function App() {
           );
         })}
       </div>
-      <div id="reader"></div>
       <div>
         Test Id's
         <input
@@ -131,7 +132,7 @@ function App() {
             setUserId(e.target.value);
           }}
         />
-        <button onClick={createOrder}>Check Id</button>
+        <div id="reader"></div>
       </div>
     </div>
   );
