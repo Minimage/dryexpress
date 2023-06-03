@@ -11,7 +11,7 @@ function App() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
-  const [scanResults, setScanResults] = useState(null);
+  const [scanResults, setScanResults] = useState("647aceb8e3dbdd850b13eb54");
   const [userId, setUserId] = useState("");
   const [getuserInfo, setGetUserInfo] = useState("");
 
