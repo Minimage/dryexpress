@@ -44,7 +44,7 @@ function App() {
       setScanResults(result);
 
       // if (scanResults != null) {
-      Axios.post("http://dryexpress.herokuapp.com/createOrder", {
+      Axios.post("https://dryexpress.herokuapp.com/createOrder", {
         userId: result.userId,
       });
       // }
