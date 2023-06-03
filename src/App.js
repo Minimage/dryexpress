@@ -42,6 +42,9 @@ function App() {
       scanner.clear();
       setScanResults(result);
       setTest(result);
+      Axios.post("https://dryexpress.herokuapp.com/createOrder", {
+        userId: result,
+      });
     }
     function error(err) {
       console.log(err);
@@ -114,17 +117,17 @@ function App() {
   //     .catch((err) => {});
   // };
 
-  useEffect(() => {
-    if (scanResults !== null) {
-      Axios.post("https://dryexpress.herokuapp.com/createOrder", {
-        userId: scanResults,
-      })
-        .then((response) => {})
-        .catch((error) => {
-          console.error(error); // Handle any errors
-        });
-    }
-  }, [scanResults]);
+  // useEffect(() => {
+  //   if (scanResults !== null) {
+  //     Axios.post("https://dryexpress.herokuapp.com/createOrder", {
+  //       userId: scanResults,
+  //     })
+  //       .then((response) => {})
+  //       .catch((error) => {
+  //         console.error(error); // Handle any errors
+  //       });
+  //   }
+  // }, [scanResults]);
 
   return (
     <div className="App">
