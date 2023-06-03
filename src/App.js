@@ -21,7 +21,7 @@ function App() {
         scanResults: scanResults,
       });
     }
-  }, scanResults);
+  }, [scanResults]);
 
   useEffect(() => {
     Axios.get("https://dryexpress.herokuapp.com/readUser")
