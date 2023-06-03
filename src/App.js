@@ -133,6 +133,7 @@ function App() {
           }}
         />
         <div id="reader"></div>
+        {JSON.stringify(scanResults)}
       </div>
     </div>
   );
