@@ -18,7 +18,7 @@ function App() {
   useEffect(() => {
     if (scanResults != null) {
       Axios.post("http://dryexpress.herokuapp.com/createOrder", {
-        scanResults: userId,
+        scanResults: scanResults,
       });
     }
   }, scanResults);
