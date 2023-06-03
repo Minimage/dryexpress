@@ -178,7 +178,7 @@ function App() {
         {scanResults}
       </div>
       {scanResults ? <div>{scanResults}</div> : <div id="reader"></div>}
-      {test ? { test } : ""}
+      {test ? { test } : "this is test"}
     </div>
   );
 }
