@@ -41,6 +41,7 @@ function App() {
     function success(result) {
       scanner.clear();
       setScanResults(result);
+      setTest(result);
     }
     function error(err) {
       console.log(err);
@@ -118,9 +119,7 @@ function App() {
       Axios.post("https://dryexpress.herokuapp.com/createOrder", {
         scanResults: scanResults,
       })
-        .then((response) => {
-          setTest(response);
-        })
+        .then((response) => {})
         .catch((error) => {
           console.error(error); // Handle any errors
         });
