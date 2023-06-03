@@ -40,8 +40,8 @@ function App() {
     scanner.render(success, error);
 
     function success(result) {
-      scanner.clear();
       setScanResults(result);
+      scanner.clear();
 
       // if (scanResults != null) {
       Axios.post("https://dryexpress.herokuapp.com/createOrder", {
