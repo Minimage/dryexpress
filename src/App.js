@@ -14,6 +14,7 @@ function App() {
   const [scanResults, setScanResults] = useState(null);
   const [userId, setUserId] = useState("");
   const [getuserInfo, setGetUserInfo] = useState("");
+  const [test, setTest] = useState("");
 
   useEffect(() => {
     Axios.get("https://dryexpress.herokuapp.com/readUser")
@@ -118,7 +119,7 @@ function App() {
         scanResults: scanResults,
       })
         .then((response) => {
-          console.log(response.data); // Handle the response data
+          setTest(response);
         })
         .catch((error) => {
           console.error(error); // Handle any errors
@@ -177,6 +178,7 @@ function App() {
         {scanResults}
       </div>
       {scanResults ? <div>{scanResults}</div> : <div id="reader"></div>}
+      {test ? { test } : ""}
     </div>
   );
 }
