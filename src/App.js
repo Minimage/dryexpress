@@ -80,7 +80,7 @@ function App() {
         width: 250,
         height: 250,
       },
-      fps: 5,
+      fps: 2,
     });
 
     scanner.render(success, error);
