@@ -1,72 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./Login.module.css";
+import Axios from "axios";
 
 export const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  function formSubmit(event) {
+    event.preventDefault();
+    Axios.post("https://dryexpress.herokuapp.com/login", {
+      email,
+      password,
+    })
+      .then((response) => {
+        // Login successful, perform necessary actions (e.g., redirect, store session)
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // Handle login error (e.g., display error message)
+        console.error(error);
+      });
+
+    setEmail("");
+    setPassword("");
+  }
+
   return (
-    <div class={style.login}>
-      <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-        <div class={style.container}>
-          <a class={style.navbarbrand} href="/sign-in">
-            positronX
-          </a>
-          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul class="navbar-nav ml-auto">
-              <li class={style.navitem}>
-                <a class={style.navlink} href="/sign-in">
-                  Login
-                </a>
-              </li>
-              <li class={style.navitem}>
-                <a class={style.navlink} href="/sign-up">
-                  Sign up
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <div class={style.authwrapper}>
-        <div class={style.authinner}>
-          <form>
-            <h3>Sign In</h3>
-            <div class={style.mb3}>
-              <label>Email address</label>
-              <input
-                type="email"
-                class={style.formcontrol}
-                placeholder="Enter email"
-              />
-            </div>
-            <div class={style.mb3}>
-              <label>Password</label>
-              <input
-                type="password"
-                class="form-control"
-                placeholder="Enter password"
-              />
-            </div>
-            <div class={style.mb3}>
-              <div class="custom-control custom-checkbox">
-                <input
-                  type="checkbox"
-                  class="customControlInput"
-                  id="customCheck1"
-                />
-                <label class={style.customControlLabel} for="customCheck1">
-                  Remember me
-                </label>
-              </div>
-            </div>
-            <div class="d-grid">
-              <button type="submit" class="btn btn-primary">
-                Submit
-              </button>
-            </div>
-            <p class="forgot-password text-right">
-              Forgot <a href="#">password?</a>
-            </p>
-          </form>
-        </div>
+    <div className={style.login}>
+      <div className={style.wrapper}>
+        <form className={style.form} onSubmit={formSubmit}>
+          <label>Email:</label>
+          <input
+            name="email"
+            id="email"
+            type="email"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            value={email}
+          />
+
+          <label>Password:</label>
+          <input
+            name="password"
+            id="password"
+            type="password"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            value={password}
+          />
+
+          <button type="submit">Submit</button>
+        </form>
       </div>
     </div>
   );

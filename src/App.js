@@ -1,6 +1,7 @@
 import "./App.css";
 import logo from "./logo.svg";
 import { Login } from "./Components/Login";
+import { Signup } from "./Components/Signup";
 
 import Axios from "axios";
 import QRCode from "react-qr-code";
@@ -17,6 +18,7 @@ function App() {
   const [getuserInfo, setGetUserInfo] = useState("");
   const [test, setTest] = useState("");
   const [orders, setOrders] = useState([]);
+  const [signup, setSignup] = useState(false);
 
   useEffect(() => {
     Axios.get("https://dryexpress.herokuapp.com/orders")
@@ -153,7 +155,9 @@ function App() {
 
   return (
     <div className="App">
+      <Signup />
       <Login />
+      <button>Signup</button>
       test
       <div className="create">
         <h2>Create User</h2>
