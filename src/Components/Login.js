@@ -16,7 +16,9 @@ export const Login = () => {
       .then((response) => {
         // Login successful, perform necessary actions (e.g., redirect, store session)
         console.log(response.data);
-        setLoginStatus(true);
+        if (response.data.auth) {
+          setLoginStatus(true);
+        }
       })
       .catch((error) => {
         // Handle login error (e.g., display error message)
