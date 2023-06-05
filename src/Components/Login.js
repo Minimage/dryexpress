@@ -7,6 +7,18 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState(false);
 
+  const userAuth = () => {
+    Axios.get("https://dryexpress.herokuapp.com/isUserAuthenticated", {
+      headers: { "x-access-token": localStorage.getItem("token") },
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   function formSubmit(event) {
     event.preventDefault();
     Axios.post("https://dryexpress.herokuapp.com/login", {
@@ -18,7 +30,7 @@ export const Login = () => {
         console.log(response.data);
         if (response.data.auth) {
           setLoginStatus(true);
-          localStorage.setItem("token", "Bearer " + response.data.token);
+          localStorage.setItem("token", response.data.token);
         }
       })
       .catch((error) => {
@@ -60,7 +72,7 @@ export const Login = () => {
           <button type="submit">Submit</button>
         </form>
 
-        {loginStatus && <button>Check Auth</button>}
+        {loginStatus && <button onClick={userAuth}>Check Auth</button>}
       </div>
     </div>
   );
