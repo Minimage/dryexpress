@@ -5,6 +5,7 @@ import Axios from "axios";
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginStatus, setLoginStatus] = useState(false);
 
   function formSubmit(event) {
     event.preventDefault();
@@ -15,10 +16,12 @@ export const Login = () => {
       .then((response) => {
         // Login successful, perform necessary actions (e.g., redirect, store session)
         console.log(response.data);
+        setLoginStatus(true);
       })
       .catch((error) => {
         // Handle login error (e.g., display error message)
         console.error(error);
+        setLoginStatus(false);
       });
 
     setEmail("");
@@ -53,6 +56,8 @@ export const Login = () => {
 
           <button type="submit">Submit</button>
         </form>
+
+        {loginStatus && <button>Check Auth</button>}
       </div>
     </div>
   );

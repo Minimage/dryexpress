@@ -19,6 +19,7 @@ function App() {
   const [test, setTest] = useState("");
   const [orders, setOrders] = useState([]);
   const [signup, setSignup] = useState(false);
+  const [loginStatus, setLoginStatus] = useState(false);
 
   useEffect(() => {
     Axios.get("https://dryexpress.herokuapp.com/orders")
