@@ -126,6 +126,7 @@ function App() {
     });
   };
 
+  //  This allows me to to get the user information by sending the userid in a get request
   const sendUserId = () => {
     Axios.get(`https://dryexpress.herokuapp.com/users/${userId}`)
       .then((response) => {
@@ -133,6 +134,18 @@ function App() {
       })
       .catch((error) => {
         console.error(error); // Handle any errors
+      });
+  };
+
+  const userAuth = () => {
+    Axios.get("https://dryexpress.herokuapp.com/isUserAuthenticated", {
+      headers: { "x-access-token": localStorage.getItem("token") },
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
@@ -216,6 +229,7 @@ function App() {
             </div>
           ))
         : ""}
+      <button onClick={userAuth}>Check auth</button>
     </div>
   );
 }

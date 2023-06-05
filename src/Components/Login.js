@@ -18,6 +18,7 @@ export const Login = () => {
         console.log(response.data);
         if (response.data.auth) {
           setLoginStatus(true);
+          localStorage.setItem("token", "Bearer " + response.data.token);
         }
       })
       .catch((error) => {
