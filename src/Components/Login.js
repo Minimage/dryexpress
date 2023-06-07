@@ -57,7 +57,11 @@ export const Login = () => {
             }}
             value={email}
           />
-          {localStorage.getItem ? <h1>youve got something here</h1> : ""}
+          {localStorage.getItem("token") ? (
+            <h1>youve got something here</h1>
+          ) : (
+            ""
+          )}
           <label>Password:</label>
           <input
             name="password"
