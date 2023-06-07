@@ -43,6 +43,11 @@ export const Login = () => {
     setPassword("");
   }
 
+  function logout(event) {
+    event.preventDefault();
+    localStorage.clear();
+  }
+
   return (
     <div className={style.login}>
       <div className={style.wrapper}>
@@ -57,11 +62,7 @@ export const Login = () => {
             }}
             value={email}
           />
-          {localStorage.getItem("token") ? (
-            <h1>youve got something here</h1>
-          ) : (
-            ""
-          )}
+
           <label>Password:</label>
           <input
             name="password"
@@ -74,9 +75,11 @@ export const Login = () => {
           />
 
           <button type="submit">Submit</button>
+          <button onClick={logout}>Logout</button>
         </form>
 
         {loginStatus && <button onClick={userAuth}>Check Auth</button>}
+        {localStorage.getItem("token") ? <h1>youve got something here</h1> : ""}
       </div>
     </div>
   );
