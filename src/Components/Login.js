@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import style from "./Login.module.css";
 import Axios from "axios";
 
@@ -29,14 +30,13 @@ export const Login = () => {
         // Login successful, perform necessary actions (e.g., redirect, store session)
         console.log(response.data);
         if (response.data.auth) {
-          setLoginStatus(true);
           localStorage.setItem("token", response.data.token);
+          navigate("/", { replace: true }); // Redirect to the home page
         }
       })
       .catch((error) => {
         // Handle login error (e.g., display error message)
         console.error(error);
-        setLoginStatus(false);
       });
 
     setEmail("");
