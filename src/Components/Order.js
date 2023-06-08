@@ -7,14 +7,8 @@ export const Order = ({ user }) => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const token = localStorage.getItem("token"); // Retrieve the token from localStorage or wherever you store it
         const response = await Axios.get(
-          `https://dryexpress.herokuapp.com/orders?userId=${user._id}`,
-          {
-            headers: {
-              "x-access-token": token, // Include the token in the request headers
-            },
-          }
+          `https://dryexpress.herokuapp.com/orders?userId=${user._id}`
         );
         const data = response.data;
         setOrders(data);
