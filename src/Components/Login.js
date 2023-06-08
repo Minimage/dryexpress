@@ -34,14 +34,6 @@ export const Login = ({ onLogin }) => {
     setPassword("");
   }
 
-  function logout(event) {
-    event.preventDefault();
-    localStorage.clear();
-    setUserData(null); // Clear user data from state
-    setLoginStatus(false);
-    onLogin(null); // Call the onLogin callback with null to indicate logout
-  }
-
   const userAuth = () => {
     Axios.get("https://dryexpress.herokuapp.com/isUserAuthenticated", {
       headers: { "x-access-token": localStorage.getItem("token") },
@@ -81,7 +73,6 @@ export const Login = ({ onLogin }) => {
           />
 
           <button type="submit">Submit</button>
-          <button onClick={logout}>Logout</button>
         </form>
 
         {loginStatus && <button onClick={userAuth}>Check Auth</button>}

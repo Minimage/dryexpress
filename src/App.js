@@ -1,6 +1,8 @@
 import { Route, Routes, Link } from "react-router-dom";
 import { Login } from "./Components/Login";
 import { HomePage } from "./HomePage";
+import { Order } from "./Components/Order";
+import { Admin } from "./Admin";
 import { useState } from "react";
 
 const App = () => {
@@ -19,13 +21,31 @@ const App = () => {
     <>
       <nav>
         <Link to="/">Home</Link>
+        <Link to="/order">Order</Link>
+        <Link to="/admin">Admin</Link>
+        {user ? <button onClick={handleLogout}>Logout</button> : ""}
       </nav>
       <Routes>
         <Route
           path="/"
           element={
-            user ? <HomePage user={user} /> : <Login onLogin={handleLogin} />
+            user ? (
+              <HomePage user={user} onLogout={handleLogout} />
+            ) : (
+              <Login onLogin={handleLogin} />
+            )
           }
+        />
+
+        <Route
+          path="/order"
+          element={
+            user ? <Order user={user} /> : <Login onLogin={handleLogin} />
+          }
+        />
+        <Route
+          path="/admin"
+          element={user ? <Admin /> : <Login onLogin={handleLogin} />}
         />
       </Routes>
     </>
