@@ -1,24 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import style from "./Login.module.css";
 import Axios from "axios";
 
-export const Login = () => {
+export const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState(false);
-
-  const userAuth = () => {
-    Axios.get("https://dryexpress.herokuapp.com/isUserAuthenticated", {
-      headers: { "x-access-token": localStorage.getItem("token") },
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const [userData, setUserData] = useState(null); // State to store user data
 
   function formSubmit(event) {
     event.preventDefault();
@@ -27,11 +15,13 @@ export const Login = () => {
       password,
     })
       .then((response) => {
-        // Login successful, perform necessary actions (e.g., redirect, store session)
+        // Login successful, perform necessary actions (e.g., store user data)
         console.log(response.data);
         if (response.data.auth) {
           setLoginStatus(true);
           localStorage.setItem("token", response.data.token);
+          setUserData(response.data.results); // Store user data in state
+          onLogin(response.data.results); // Call the onLogin callback with user data
         }
       })
       .catch((error) => {
@@ -47,7 +37,22 @@ export const Login = () => {
   function logout(event) {
     event.preventDefault();
     localStorage.clear();
+    setUserData(null); // Clear user data from state
+    setLoginStatus(false);
+    onLogin(null); // Call the onLogin callback with null to indicate logout
   }
+
+  const userAuth = () => {
+    Axios.get("https://dryexpress.herokuapp.com/isUserAuthenticated", {
+      headers: { "x-access-token": localStorage.getItem("token") },
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className={style.login}>
@@ -80,7 +85,15 @@ export const Login = () => {
         </form>
 
         {loginStatus && <button onClick={userAuth}>Check Auth</button>}
-        {localStorage.getItem("token") ? <h1>youve got something here</h1> : ""}
+        {localStorage.getItem("token") ? (
+          <>
+            <h1>You are logged in!</h1>
+            <h2>Welcome, {userData && userData.firstName}</h2>{" "}
+            {/* Display user data */}
+          </>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
