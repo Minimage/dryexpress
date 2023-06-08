@@ -7,14 +7,18 @@ export const Order = ({ user }) => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await Axios.get(`/orders?userId=${user._id}`);
+        const response = await Axios.get(
+          `https://dryexpress.herokuapp.com/orders?userId=${user._id}`
+        );
         setOrders(response.data);
       } catch (error) {
         console.log(error);
       }
     };
 
-    fetchOrders();
+    if (user) {
+      fetchOrders();
+    }
   }, [user]);
 
   return (
