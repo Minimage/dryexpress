@@ -3,6 +3,16 @@ import Axios from "axios";
 
 export const Order = ({ user }) => {
   const [orders, setOrders] = useState([]);
+  const [date, setDate] = useState();
+
+  const currentDate = new Date();
+
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  };
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -20,6 +30,10 @@ export const Order = ({ user }) => {
     fetchOrders();
   }, [user]);
 
+  // console.log(currentDate.toLocaleDateString("en-us", options));
+  const newDate = orders.dateTime;
+  // console.log(date);
+
   return (
     <div>
       <h1>Orders</h1>
@@ -28,13 +42,22 @@ export const Order = ({ user }) => {
           <div key={order._id}>
             <p>First Name: {order.firstName}</p>
             <p>Last Name: {order.lastName}</p>
-            <p>Date and Time: {order.formattedDateTime}</p>
+            <p>
+              Date and Time: {new Date(order.dateTime).toDateString()}
+              {"  "}
+              {new Date(order.dateTime).toLocaleString("en-US", {
+                hour: "numeric",
+                minute: "numeric",
+                hour12: true,
+              })}
+              :
+            </p>
           </div>
         ))
       ) : (
         <p>No orders found.</p>
       )}
-      {console.log(orders)}
+      {/* {console.log(orders)} */}
     </div>
   );
 };
