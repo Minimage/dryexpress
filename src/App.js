@@ -3,6 +3,7 @@ import { Login } from "./Components/Login";
 import { HomePage } from "./HomePage";
 import { Order } from "./Components/Order";
 import { Admin } from "./Admin";
+import { RegisterApparments } from "./Components/RegisterApparments";
 import { useState } from "react";
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
         <Link to="/">Home</Link>
         <Link to="/order">Order</Link>
         <Link to="/admin">Admin</Link>
+        <Link to="/register">Register</Link>
         {user ? <button onClick={handleLogout}>Logout</button> : ""}
       </nav>
       <Routes>
@@ -46,6 +48,12 @@ const App = () => {
         <Route
           path="/admin"
           element={user ? <Admin /> : <Login onLogin={handleLogin} />}
+        />
+        <Route
+          path="/register"
+          element={
+            user ? <RegisterApparments /> : <Login onLogin={handleLogin} />
+          }
         />
       </Routes>
     </>
