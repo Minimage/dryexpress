@@ -26,7 +26,7 @@ const App = () => {
         <Link to="/order">Order</Link>
         <Link to="/admin">Admin</Link>
         <Link to="/register">Register</Link>
-        <Link to="/EmployeeRegister">Register</Link>
+        <Link to="/EmployeeRegister">Register Employee</Link>
 
         {user ? <button onClick={handleLogout}>Logout</button> : ""}
       </nav>
