@@ -7,7 +7,7 @@ export const Signup = () => {
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("User");
+  const [Role, setRole] = useState("User");
 
   function formSubmit(event) {
     event.preventDefault();
@@ -17,7 +17,7 @@ export const Signup = () => {
       address,
       email,
       password,
-      role,
+      Role,
     });
 
     setFirstName("");
