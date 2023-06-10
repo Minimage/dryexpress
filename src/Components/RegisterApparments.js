@@ -1,10 +1,18 @@
 import React, { useState } from "react";
+import Axios from "axios";
 
 export const RegisterApparments = () => {
   const [apparmentName, setAppartmentName] = useState();
   const [address, setAddress] = useState();
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    Axios.post("https://dryexpress.herokuapp.com/apparmentRegister", {
+      apparmentName: apparmentName,
+      address: address,
+    }).catch((err) => {
+      console.log(err);
+    });
+  };
 
   return (
     <div>
@@ -26,7 +34,7 @@ export const RegisterApparments = () => {
 
       <br />
 
-      <button>Submit</button>
+      <button onClick={handleSubmit}>Submit</button>
     </div>
   );
 };

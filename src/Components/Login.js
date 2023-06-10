@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import style from "./Login.module.css";
 import Axios from "axios";
-
+import { Dropdown, Option } from "./Dropdown";
 export const Login = ({ onLogin }) => {
+  const [optionValue, setOptionValue] = useState("");
+  const handleSelect = (e) => {
+    console.log(e.target.value);
+    setOptionValue(e.target.value);
+  };
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState(false);
@@ -86,6 +91,19 @@ export const Login = ({ onLogin }) => {
           ""
         )}
       </div>
+
+      <Dropdown
+        formLabel="Choose a service"
+        buttonText="Send form"
+        onChange={handleSelect}
+        action="https://jsonplaceholder.typicode.com/posts"
+      >
+        <Option selected value="Sub" />
+        <Option value="Driver" />
+        <Option value="Owner" />
+        <Option value="Admin" />
+      </Dropdown>
+      <p>You selected {optionValue} </p>
     </div>
   );
 };
