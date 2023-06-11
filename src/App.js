@@ -1,23 +1,60 @@
+import React, { useState, useEffect } from "react";
 import { Route, Routes, Link } from "react-router-dom";
+import Axios from "axios";
 import { Login } from "./Components/Login";
 import { HomePage } from "./HomePage";
 import { Order } from "./Components/Order";
 import { Admin } from "./Admin";
 import { RegEmployee } from "./Components/RegEmployee";
 import { RegisterApparments } from "./Components/RegisterApparments";
-import { useState } from "react";
 
 const App = () => {
   const [user, setUser] = useState(null);
 
   const handleLogin = (userData) => {
     setUser(userData);
+    localStorage.setItem("isAuthenticated", "true"); // Set authentication status in local storage
+    localStorage.setItem("userData", JSON.stringify(userData)); // Store user data in local storage
   };
 
   const handleLogout = () => {
     setUser(null);
     localStorage.removeItem("token");
+    localStorage.removeItem("isAuthenticated"); // Remove authentication status from local storage
+    localStorage.removeItem("userData"); // Remove user data from local storage
   };
+
+  const userAuth = () => {
+    Axios.get("https://dryexpress.herokuapp.com/isUserAuthenticated", {
+      headers: { "x-access-token": localStorage.getItem("token") },
+    })
+      .then((response) => {
+        if (response.data.auth) {
+          setUser(response.data.results);
+          localStorage.setItem("isAuthenticated", "true"); // Set authentication status in local storage
+        } else {
+          handleLogout(); // Logout the user if not authenticated
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        handleLogout(); // Logout the user if an error occurs
+      });
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const isAuthenticated = localStorage.getItem("isAuthenticated"); // Get authentication status from local storage
+    const storedUserData = localStorage.getItem("userData"); // Get user data from local storage
+
+    if (token && isAuthenticated) {
+      if (storedUserData) {
+        setUser(JSON.parse(storedUserData)); // Set the user data from local storage
+      } else {
+        userAuth(); // Retrieve user data from the backend if not available in local storage
+      }
+    }
+  }, []);
 
   return (
     <>
@@ -26,15 +63,19 @@ const App = () => {
         <Link to="/order">Order</Link>
         <Link to="/admin">Admin</Link>
         <Link to="/register">Register</Link>
-        <Link to="/EmployeeRegister">Register Employee</Link>
+        <Link to="/employeeRegister">Register Employee</Link>
 
-        {user ? <button onClick={handleLogout}>Logout</button> : ""}
+        {localStorage.getItem("isAuthenticated") === "true" ? (
+          <button onClick={handleLogout}>Logout</button>
+        ) : (
+          ""
+        )}
       </nav>
       <Routes>
         <Route
           path="/"
           element={
-            user ? (
+            localStorage.getItem("isAuthenticated") === "true" ? (
               <HomePage user={user} onLogout={handleLogout} />
             ) : (
               <Login onLogin={handleLogin} />
@@ -45,22 +86,42 @@ const App = () => {
         <Route
           path="/order"
           element={
-            user ? <Order user={user} /> : <Login onLogin={handleLogin} />
+            localStorage.getItem("isAuthenticated") === "true" ? (
+              <Order user={user} />
+            ) : (
+              <Login onLogin={handleLogin} />
+            )
           }
         />
         <Route
           path="/admin"
-          element={user ? <Admin /> : <Login onLogin={handleLogin} />}
+          element={
+            localStorage.getItem("isAuthenticated") === "true" ? (
+              <Admin />
+            ) : (
+              <Login onLogin={handleLogin} />
+            )
+          }
         />
         <Route
           path="/register"
           element={
-            user ? <RegisterApparments /> : <Login onLogin={handleLogin} />
+            localStorage.getItem("isAuthenticated") === "true" ? (
+              <RegisterApparments />
+            ) : (
+              <Login onLogin={handleLogin} />
+            )
           }
         />
         <Route
           path="/employeeRegister"
-          element={user ? <RegEmployee /> : <Login onLogin={handleLogin} />}
+          element={
+            localStorage.getItem("isAuthenticated") === "true" ? (
+              <RegEmployee />
+            ) : (
+              <Login onLogin={handleLogin} />
+            )
+          }
         />
       </Routes>
     </>

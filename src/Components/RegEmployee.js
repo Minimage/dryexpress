@@ -62,8 +62,8 @@ export const RegEmployee = () => {
 
         <label>Username:</label>
         <input
-          name="address"
-          id="address"
+          name="Username"
+          id="Username"
           type="text"
           onChange={(e) => {
             setUsername(e.target.value);
@@ -93,6 +93,7 @@ export const RegEmployee = () => {
           value={Role}
         />
 
+        <label>Apartment: </label>
         <select name="reg" onChange={handleSelect}>
           <option selected>Please select a facility</option>
           {data.map((item, index) => (

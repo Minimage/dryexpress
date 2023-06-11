@@ -11,8 +11,8 @@ export const HomePage = ({ user, onLogout }) => {
 
   return (
     <div>
-      <h1>Welcome, {user.firstName}</h1>
-      <QRCode size={120} value={user._id} />
+      <h1>Welcome, {user?.firstName}</h1>
+      {user ? <QRCode size={120} value={user?._id} /> : ""}
 
       {/* Other content */}
     </div>
