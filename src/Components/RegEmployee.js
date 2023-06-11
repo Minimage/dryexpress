@@ -12,7 +12,7 @@ export const RegEmployee = () => {
   const [Role, setRole] = useState();
   const [ApartmentID, setApartmentID] = useState();
 
-  const handleSelect = (e) => {
+  const handleSelectApartment = (e) => {
     setApartmentID(e.target.value);
   };
 
@@ -93,8 +93,15 @@ export const RegEmployee = () => {
           value={Role}
         />
 
+        <select name="role" id="role">
+          <option value="Driver">Driver</option>
+          <option value="Sub">Sub</option>
+          <option value="Owner">Owner</option>
+          <option value="Admin">Admin</option>
+        </select>
+
         <label>Apartment: </label>
-        <select name="reg" onChange={handleSelect}>
+        <select name="reg" onChange={handleSelectApartment}>
           <option selected>Please select a facility</option>
           {data.map((item, index) => (
             <option key={index} value={item._id}>

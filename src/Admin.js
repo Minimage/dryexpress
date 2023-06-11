@@ -126,7 +126,7 @@ export const Admin = () => {
     });
   };
 
-  //  This allows me to to get the user information by sending the userid in a get request
+  // This allows me to to get the user information by sending the userid in a get request via params
   const sendUserId = () => {
     Axios.get(`https://dryexpress.herokuapp.com/users/${userId}`)
       .then((response) => {
