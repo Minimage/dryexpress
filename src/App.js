@@ -6,10 +6,14 @@ import { HomePage } from "./HomePage";
 import { Order } from "./Components/Order";
 import { Admin } from "./Admin";
 import { RegEmployee } from "./Components/RegEmployee";
+import { Apartments } from "./Components/Apartments";
 import { RegisterApparments } from "./Components/RegisterApparments";
 
 const App = () => {
   const [user, setUser] = useState(null);
+  const [employee, setEmployee] = useState({
+    apartmentID: "6484fc129bc19daac2410a78",
+  });
 
   const handleLogin = (userData) => {
     setUser(userData);
@@ -58,12 +62,13 @@ const App = () => {
 
   return (
     <>
-      <nav>
+      <nav className="links">
         <Link to="/">Home</Link>
         <Link to="/order">Order</Link>
         <Link to="/admin">Admin</Link>
         <Link to="/register">Register</Link>
         <Link to="/employeeRegister">Register Employee</Link>
+        <Link to="/apartments">Apartments</Link>
 
         {localStorage.getItem("isAuthenticated") === "true" ? (
           <button onClick={handleLogout}>Logout</button>
@@ -118,6 +123,16 @@ const App = () => {
           element={
             localStorage.getItem("isAuthenticated") === "true" ? (
               <RegEmployee />
+            ) : (
+              <Login onLogin={handleLogin} />
+            )
+          }
+        />
+        <Route
+          path="/apartments"
+          element={
+            localStorage.getItem("isAuthenticated") === "true" ? (
+              <Apartments employee={employee} />
             ) : (
               <Login onLogin={handleLogin} />
             )
