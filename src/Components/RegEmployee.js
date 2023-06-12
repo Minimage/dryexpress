@@ -5,19 +5,18 @@ export const RegEmployee = () => {
   const [data, setData] = useState([]);
   const [drop, setDrop] = useState();
 
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
-  const [role, setRole] = useState();
-  const [ApartmentID, setApartmentID] = useState();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
+  const [apartmentID, setApartmentID] = useState("");
 
   const handleSelectApartment = (e) => {
     setApartmentID(e.target.value);
   };
 
   const handleSelect = (e) => {
-    console.log(e.target.value);
     setRole(e.target.value);
   };
 
@@ -26,21 +25,29 @@ export const RegEmployee = () => {
     Axios.post("https://dryexpress.herokuapp.com/employeeRegister", {
       firstName: firstName,
       lastName: lastName,
-      Username: username,
-      Password: password,
-      Role: role,
-      ApartmentID: ApartmentID,
-    });
+      username: username,
+      password: password,
+      role: role,
+      apartmentID: apartmentID,
+    })
+      .then((response) => {
+        // Handle the success response here if needed
+      })
+      .catch((error) => {
+        // Handle the error here if needed
+      });
   };
 
   useEffect(() => {
     Axios.get("https://dryexpress.herokuapp.com/getApartments")
       .then((response) => {
-        console.log(response);
         setData(response.data);
       })
-      .catch((error) => {});
+      .catch((error) => {
+        // Handle the error here if needed
+      });
   }, []);
+
   return (
     <div>
       <form onSubmit={formSubmit}>
@@ -68,8 +75,8 @@ export const RegEmployee = () => {
 
         <label>Username:</label>
         <input
-          name="Username"
-          id="Username"
+          name="username"
+          id="username"
           type="text"
           onChange={(e) => {
             setUsername(e.target.value);
@@ -86,29 +93,24 @@ export const RegEmployee = () => {
             setPassword(e.target.value);
           }}
           value={password}
-        ></input>
+        />
 
         <label>Role:</label>
-
         <select name="role" id="role" onChange={handleSelect}>
-          <option selected value="Driver">
-            Driver
-          </option>
+          <option value="Driver">Driver</option>
           <option value="Sub">Sub</option>
           <option value="Owner">Owner</option>
           <option value="Admin">Admin</option>
         </select>
 
-        {role}
-        <label>Apartment: </label>
-        <select name="reg" onChange={handleSelectApartment}>
-          <option selected>Please select a facility</option>
+        <label>Apartment:</label>
+        <select name="apartment" onChange={handleSelectApartment}>
+          <option>Please select a facility</option>
           {data.map((item, index) => (
             <option key={index} value={item._id}>
               {item.apparmentName}
             </option>
           ))}
-          ;
         </select>
 
         <button type="submit">Submit</button>
