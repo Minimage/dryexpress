@@ -20,22 +20,21 @@ export const RegEmployee = () => {
     setRole(e.target.value);
   };
 
-  const formSubmit = (event) => {
+  const formSubmit = async (event) => {
     event.preventDefault();
-    Axios.post("https://dryexpress.herokuapp.com/employeeRegister", {
-      firstName: firstName,
-      lastName: lastName,
-      username: username,
-      password: password,
-      role: role,
-      apartmentID: apartmentID,
-    })
-      .then((response) => {
-        // Handle the success response here if needed
-      })
-      .catch((error) => {
-        // Handle the error here if needed
+    try {
+      await Axios.post("https://dryexpress.herokuapp.com/employeeRegister", {
+        firstName: firstName,
+        lastName: lastName,
+        username: username,
+        password: password,
+        role: role,
+        apartmentID: apartmentID,
       });
+      // Handle the success response here if needed
+    } catch (error) {
+      // Handle the error here if needed
+    }
   };
 
   useEffect(() => {
