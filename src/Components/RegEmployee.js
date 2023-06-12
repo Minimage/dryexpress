@@ -9,7 +9,7 @@ export const RegEmployee = () => {
   const [lastName, setLastName] = useState();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-  const [Role, setRole] = useState();
+  const [role, setRole] = useState();
   const [ApartmentID, setApartmentID] = useState();
 
   const handleSelectApartment = (e) => {
@@ -20,9 +20,9 @@ export const RegEmployee = () => {
     Axios.post("https://dryexpress.herokuapp.com/employeeRegister", {
       firstName: firstName,
       lastName: lastName,
-      Username: username,
-      Password: password,
-      Role: Role,
+      username: username,
+      password: password,
+      role: role,
       ApartmentID: ApartmentID,
     });
   };
