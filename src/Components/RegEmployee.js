@@ -16,7 +16,13 @@ export const RegEmployee = () => {
     setApartmentID(e.target.value);
   };
 
-  const formSubmit = () => {
+  const handleSelect = (e) => {
+    console.log(e.target.value);
+    setRole(e.target.value);
+  };
+
+  const formSubmit = (event) => {
+    event.preventDefault();
     Axios.post("https://dryexpress.herokuapp.com/employeeRegister", {
       firstName: firstName,
       lastName: lastName,
@@ -83,23 +89,17 @@ export const RegEmployee = () => {
         ></input>
 
         <label>Role:</label>
-        <input
-          name="role"
-          id="role"
-          type="text"
-          onChange={(e) => {
-            setRole(e.target.value);
-          }}
-          value={Role}
-        />
 
-        <select name="role" id="role">
-          <option value="Driver">Driver</option>
+        <select name="role" id="role" onChange={handleSelect}>
+          <option selected value="Driver">
+            Driver
+          </option>
           <option value="Sub">Sub</option>
           <option value="Owner">Owner</option>
           <option value="Admin">Admin</option>
         </select>
 
+        {role}
         <label>Apartment: </label>
         <select name="reg" onChange={handleSelectApartment}>
           <option selected>Please select a facility</option>
