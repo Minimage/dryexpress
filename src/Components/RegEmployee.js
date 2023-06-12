@@ -26,9 +26,9 @@ export const RegEmployee = () => {
     Axios.post("https://dryexpress.herokuapp.com/employeeRegister", {
       firstName: firstName,
       lastName: lastName,
-      username: username,
-      password: password,
-      role: role,
+      Username: username,
+      Password: password,
+      Role: role,
       ApartmentID: ApartmentID,
     });
   };
