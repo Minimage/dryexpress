@@ -26,10 +26,10 @@ export const RegEmployee = () => {
       await Axios.post("https://dryexpress.herokuapp.com/employeeRegister", {
         firstName: firstName,
         lastName: lastName,
-        username: username,
-        password: password,
-        role: role,
-        apartmentID: apartmentID,
+        Username: username,
+        Password: password,
+        Role: role,
+        ApartmentID: apartmentID,
       });
       // Handle the success response here if needed
     } catch (error) {
