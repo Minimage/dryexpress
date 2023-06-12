@@ -9,7 +9,7 @@ export const RegEmployee = () => {
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("Driver");
   const [apartmentID, setApartmentID] = useState("");
 
   const handleSelectApartment = (e) => {
