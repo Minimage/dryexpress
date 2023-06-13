@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
 import Axios from "axios";
+import React, { useState, useEffect } from "react";
+import { Route, Routes, Link } from "react-router-dom";
 
 export const Apartments = ({ employee, data, onDataUpdate }) => {
   // Remove the useState for data and setData
@@ -55,6 +56,13 @@ export const Apartments = ({ employee, data, onDataUpdate }) => {
           {data?.users.map((user) => {
             return (
               <div className="users">
+                <Link
+                  className={data != null ? "show" : "hide"}
+                  to="/AddUserQR"
+                >
+                  <button>Add User</button>
+                </Link>
+                <br />
                 {user.firstName} {user.lastName}
               </div>
             );

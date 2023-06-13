@@ -9,6 +9,7 @@ import { RegEmployee } from "./Components/RegEmployee";
 import { Apartments } from "./Components/Apartments";
 import { EmployeeLogin } from "./Components/EmployeeLogin";
 import { RegisterApparments } from "./Components/RegisterApparments";
+import { AddUser } from "./Components/AddUser";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -170,6 +171,15 @@ const App = () => {
             ) : (
               <div>You do not have access to this page</div>
             )
+          }
+        />
+
+        <Route
+          path="/AddUserQR"
+          element={
+            <div>
+              <AddUser />
+            </div>
           }
         />
       </Routes>
