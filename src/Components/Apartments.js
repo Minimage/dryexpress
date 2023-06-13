@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 
-export const Apartments = () => {
-  const [data, setData] = useState(null);
+export const Apartments = ({ employee, data, onDataUpdate }) => {
+  // Remove the useState for data and setData
+  // const [data, setData] = useState(null);
   const userDataString = localStorage.getItem("userData");
   const userData = JSON.parse(userDataString);
 
@@ -13,23 +14,55 @@ export const Apartments = () => {
           const response = await Axios.get(
             `https://dryexpress.herokuapp.com/apartments/${userData.apartmentId}`
           );
-          setData(response.data);
+          onDataUpdate(response.data); // Update the data in the App component
         } catch (err) {
           console.log(err);
         }
       }
     };
 
-    console.log(data);
-
     fetchData();
-  }, []);
+  }, [userData.apartmentId]);
+
+  console.log(data);
+  console.log(userData);
 
   return (
     <div>
       <h1>{data?.apartment?.apparmentName}</h1>
       <br />
+
       <span>{data?.apartment?.address}</span>
+
+      {userData?.role != "User" ? (
+        <div className="employeeHolder">
+          <h1>Employees</h1>
+          {data?.employees.map((employee) => {
+            return (
+              <div className="employee">
+                {employee.firstName} {employee.lastName}
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        ""
+      )}
+
+      {userData?.role != "User" ? (
+        <div className="usersHolder">
+          <h1>Users</h1>
+          {data?.users.map((user) => {
+            return (
+              <div className="users">
+                {user.firstName} {user.lastName}
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

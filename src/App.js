@@ -15,7 +15,12 @@ const App = () => {
   const [employee, setEmployee] = useState({
     apartmentID: "6484fc129bc19daac2410a78",
   });
-  const [data, setData] = useState();
+
+  const [data, setData] = useState(null);
+
+  const handleDataUpdate = (newData) => {
+    setData(newData);
+  };
 
   const handleLogin = (userData) => {
     setUser(userData);
@@ -142,7 +147,11 @@ const App = () => {
           path="/apartments"
           element={
             localStorage.getItem("isAuthenticated") === "true" ? (
-              <Apartments employee={employee} />
+              <Apartments
+                employee={employee}
+                data={data}
+                onDataUpdate={handleDataUpdate}
+              />
             ) : (
               <Login onLogin={handleLogin} />
             )

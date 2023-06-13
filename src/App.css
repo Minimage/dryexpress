@@ -149,3 +149,15 @@
 .signup-link a {
   text-decoration: underline;
 }
+
+.employee {
+  margin-top: 30px;
+}
+
+.users {
+  margin-top: 30px;
+}
+
+.usersHolder {
+  margin-top: 60px;
+}
