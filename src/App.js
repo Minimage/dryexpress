@@ -147,7 +147,11 @@ const App = () => {
           path="/EmployeeLogin"
           element={
             user?.role == null ? (
-              <EmployeeLogin employee={employee} user={user} />
+              <EmployeeLogin
+                onLogin={handleLogin}
+                employee={employee}
+                user={user}
+              />
             ) : (
               <div>You do not have access to this page</div>
             )
