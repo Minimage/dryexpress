@@ -20,8 +20,9 @@ export const AddUser = () => {
       setScanResults(result);
 
       try {
-        await Axios.post(`https://dryexpress.herokuapp.com/AddUserQR`, {
+        await Axios.post(`https://dryexpress.herokuapp.com/usersQR`, {
           userID: scanResults,
+          apartmentId: "testing",
         });
       } catch (error) {
         console.error(error);
