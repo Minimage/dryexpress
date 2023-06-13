@@ -98,7 +98,7 @@ export const Login = ({ onLogin }) => {
         onChange={handleSelect}
         action="https://jsonplaceholder.typicode.com/posts"
       >
-        <Option selected value="Sub" />
+        <Option defaultValue value="Sub" />
         <Option value="Driver" />
         <Option value="Owner" />
         <Option value="Admin" />

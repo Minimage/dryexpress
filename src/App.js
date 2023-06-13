@@ -15,11 +15,17 @@ const App = () => {
   const [employee, setEmployee] = useState({
     apartmentID: "6484fc129bc19daac2410a78",
   });
+  const [data, setData] = useState();
 
   const handleLogin = (userData) => {
     setUser(userData);
     localStorage.setItem("isAuthenticated", "true"); // Set authentication status in local storage
     localStorage.setItem("userData", JSON.stringify(userData)); // Store user data in local storage
+    const userDataString = localStorage.getItem("userData");
+    const myData = JSON.parse(userDataString);
+    // setEmployee({
+    //   apartmentId: myData.apartmentId,
+    // });
   };
 
   const handleLogout = () => {

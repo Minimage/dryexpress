@@ -1,0 +1,31 @@
+We should change our structure to this
+
+src/
+├── components/
+│   ├── Apartments/
+│   │   └── Apartments.js
+│   ├── Dropdown/
+│   │   └── Dropdown.js
+│   ├── EmployeeLogin/
+│   │   ├── EmployeeLogin.js
+│   │   └── EmployeeLogin.module.css
+│   ├── Login/
+│   │   ├── Login.js
+│   │   └── Login.module.css
+│   ├── Order/
+│   │   └── Order.js
+│   ├── RegEmployee/
+│   │   └── RegEmployee.js
+│   ├── RegisterApartments/
+│   │   └── RegisterApartments.js
+│   ├── Signup/
+│   │   ├── Signup.js
+│   │   └── Signup.module.css
+│   └── styles.js
+├── Admin.js
+├── App.css
+├── App.js
+├── App.test.js
+├── HomePage.js
+├── index.css
+└── index.js

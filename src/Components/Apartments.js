@@ -1,25 +1,29 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 
-export const Apartments = ({ employee }) => {
-  const [aptID, setAptID] = useState(employee.apartmentID);
-  const [data, setData] = useState();
+export const Apartments = () => {
+  const [data, setData] = useState(null);
+  const userDataString = localStorage.getItem("userData");
+  const userData = JSON.parse(userDataString);
 
-  console.log(employee);
   useEffect(() => {
-    if (employee.apartmentID) {
-      Axios.get(
-        `https://dryexpress.herokuapp.com/apartments/${employee.apartmentID}`
-      )
-        .then((response) => {
-          console.log(response);
+    const fetchData = async () => {
+      if (userData && userData.apartmentId) {
+        try {
+          const response = await Axios.get(
+            `https://dryexpress.herokuapp.com/apartments/${userData.apartmentId}`
+          );
           setData(response.data);
-        })
-        .catch((err) => {
+        } catch (err) {
           console.log(err);
-        });
-    }
-  }, [employee.ApartmentID]);
+        }
+      }
+    };
+
+    console.log(data);
+
+    fetchData();
+  }, []);
 
   return (
     <div>

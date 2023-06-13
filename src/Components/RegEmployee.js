@@ -10,10 +10,10 @@ export const RegEmployee = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("Driver");
-  const [apartmentID, setApartmentID] = useState("");
+  const [apartmentId, setapartmentId] = useState("");
 
   const handleSelectApartment = (e) => {
-    setApartmentID(e.target.value);
+    setapartmentId(e.target.value);
   };
 
   const handleSelect = (e) => {
@@ -29,7 +29,7 @@ export const RegEmployee = () => {
         Username: username,
         Password: password,
         Role: role,
-        ApartmentID: apartmentID,
+        apartmentId: apartmentId,
       });
       // Handle the success response here if needed
     } catch (error) {
