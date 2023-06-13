@@ -31,8 +31,8 @@ export const AddUser = () => {
       if (scanResults) {
         try {
           await Axios.patch("https://dryexpress.herokuapp.com/usersQR", {
-            userID: scanResults,
-            apartmentId: "testing",
+            userID: "6487f2b37f5523c94fbade92",
+            apartmentId: "Letssee",
           });
         } catch (error) {
           console.error(error);
