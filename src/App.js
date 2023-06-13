@@ -7,6 +7,7 @@ import { Order } from "./Components/Order";
 import { Admin } from "./Admin";
 import { RegEmployee } from "./Components/RegEmployee";
 import { Apartments } from "./Components/Apartments";
+import { EmployeeLogin } from "./Components/EmployeeLogin";
 import { RegisterApparments } from "./Components/RegisterApparments";
 
 const App = () => {
@@ -69,6 +70,9 @@ const App = () => {
         <Link to="/register">Register</Link>
         <Link to="/employeeRegister">Register Employee</Link>
         <Link to="/apartments">Apartments</Link>
+        <Link className={user == null ? "show" : "hide"} to="/EmployeeLogin">
+          Employee Login
+        </Link>
 
         {localStorage.getItem("isAuthenticated") === "true" ? (
           <button onClick={handleLogout}>Logout</button>
@@ -135,6 +139,17 @@ const App = () => {
               <Apartments employee={employee} />
             ) : (
               <Login onLogin={handleLogin} />
+            )
+          }
+        />
+
+        <Route
+          path="/EmployeeLogin"
+          element={
+            user?.role == null ? (
+              <EmployeeLogin employee={employee} user={user} />
+            ) : (
+              <div>You do not have access to this page</div>
             )
           }
         />
