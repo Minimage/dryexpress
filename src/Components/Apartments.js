@@ -30,7 +30,7 @@ export const Apartments = ({ employee, data, onDataUpdate }) => {
 
   return (
     <div>
-      <h1>{data?.apartment?.apparmentName}</h1>
+      <h1>{data?.apartment ? data.apartment.apparmentName : "ok"}</h1>
       <br />
 
       <span>{data?.apartment?.address}</span>

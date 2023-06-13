@@ -4,6 +4,7 @@ import { Html5QrcodeScanner } from "html5-qrcode";
 
 export const AddUser = () => {
   const [scanResults, setScanResults] = useState(null);
+
   useEffect(() => {
     const scanner = new Html5QrcodeScanner("reader", {
       qrbox: {
@@ -15,24 +16,33 @@ export const AddUser = () => {
 
     scanner.render(success, error);
 
-    async function success(result) {
+    function success(result) {
       scanner.clear();
       setScanResults(result);
-
-      try {
-        await Axios.post(`https://dryexpress.herokuapp.com/usersQR`, {
-          userID: scanResults,
-          apartmentId: "testing",
-        });
-      } catch (error) {
-        console.error(error);
-      }
     }
 
     function error(err) {
       console.log(err);
     }
   }, []);
+
+  useEffect(() => {
+    async function updateUserWithApartment() {
+      if (scanResults) {
+        try {
+          await Axios.patch("https://dryexpress.herokuapp.com/usersQR", {
+            userID: scanResults,
+            apartmentId: "testing",
+          });
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    }
+
+    updateUserWithApartment();
+  }, [scanResults]);
+
   return (
     <div>
       {scanResults ? <div>{scanResults}</div> : <div id="reader"></div>}
