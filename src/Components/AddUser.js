@@ -32,7 +32,7 @@ export const AddUser = () => {
         try {
           await Axios.patch("https://dryexpress.herokuapp.com/usersQR", {
             userID: scanResults, // Use the scanned QR code result here
-            apartmentId: "Letssee",
+            apartmentId: "Ok_But_Will_IT_Rewrite?",
           });
         } catch (error) {
           console.error(error);
