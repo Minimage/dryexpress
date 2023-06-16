@@ -3,7 +3,7 @@ import { RegEmployee } from "./RegEmployee";
 import { Route, Routes, Link } from "react-router-dom";
 import axios from "axios";
 
-export const EmployeeLogin = ({ employee, user, onLogin }) => {
+export const EmployeeLogin = ({ employee, user, onLogin, setEmployee }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState(false);
@@ -24,6 +24,7 @@ export const EmployeeLogin = ({ employee, user, onLogin }) => {
           setLoginStatus(true);
           localStorage.setItem("token", response.data.token);
           setUserData(response.data.results); // Store user data in state
+          setEmployee({ apartmentId: response.data.results.apartmentId });
           onLogin(response.data.results); // Call the onLogin callback with user data
         }
       })

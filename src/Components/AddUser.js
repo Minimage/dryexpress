@@ -2,7 +2,7 @@ import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Html5QrcodeScanner } from "html5-qrcode";
 
-export const AddUser = () => {
+export const AddUser = ({ employee }) => {
   const [scanResults, setScanResults] = useState(null);
 
   useEffect(() => {

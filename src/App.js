@@ -13,9 +13,7 @@ import { AddUser } from "./Components/AddUser";
 
 const App = () => {
   const [user, setUser] = useState(null);
-  const [employee, setEmployee] = useState({
-    apartmentID: "6484fc129bc19daac2410a78",
-  });
+  const [employee, setEmployee] = useState(null);
 
   const [data, setData] = useState(null);
 
@@ -40,6 +38,8 @@ const App = () => {
     localStorage.removeItem("isAuthenticated"); // Remove authentication status from local storage
     localStorage.removeItem("userData"); // Remove user data from local storage
   };
+
+  console.log(employee);
 
   const userAuth = () => {
     Axios.get("https://dryexpress.herokuapp.com/isUserAuthenticated", {
@@ -84,6 +84,9 @@ const App = () => {
         <Link to="/apartments">Apartments</Link>
         <Link className={user == null ? "show" : "hide"} to="/EmployeeLogin">
           Employee Login
+        </Link>
+        <Link className={employee != null ? "show" : "hide"} to="/AddUserQR">
+          ok
         </Link>
 
         {localStorage.getItem("isAuthenticated") === "true" ? (
@@ -166,6 +169,7 @@ const App = () => {
               <EmployeeLogin
                 onLogin={handleLogin}
                 employee={employee}
+                setEmployee={setEmployee}
                 user={user}
               />
             ) : (
@@ -186,7 +190,7 @@ const App = () => {
           path="/AddUserQR"
           element={
             <div>
-              <AddUser />
+              <AddUser employee={employee} />
             </div>
           }
         />
