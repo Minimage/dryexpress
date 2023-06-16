@@ -169,7 +169,15 @@ const App = () => {
                 user={user}
               />
             ) : (
-              <div>You do not have access to this page</div>
+              <div>
+                {user?.role != "User" ||
+                user?.role === "Sub" ||
+                user?.role === "Admin" ? (
+                  <Apartments />
+                ) : (
+                  ""
+                )}
+              </div>
             )
           }
         />
