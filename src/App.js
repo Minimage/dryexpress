@@ -177,7 +177,11 @@ const App = () => {
                 {user?.role != "User" ||
                 user?.role === "Sub" ||
                 user?.role === "Admin" ? (
-                  <Apartments />
+                  <Apartments
+                    employee={employee}
+                    data={data}
+                    onDataUpdate={handleDataUpdate}
+                  />
                 ) : (
                   ""
                 )}
