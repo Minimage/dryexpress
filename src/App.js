@@ -10,6 +10,7 @@ import { Apartments } from "./Components/Apartments";
 import { EmployeeLogin } from "./Components/EmployeeLogin";
 import { RegisterApparments } from "./Components/RegisterApparments";
 import { AddUser } from "./Components/AddUser";
+import { Setter } from "./Components/Setter";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -198,6 +199,8 @@ const App = () => {
             </div>
           }
         />
+
+        <Route path="/Setter" element={<Setter />} />
       </Routes>
     </>
   );
