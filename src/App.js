@@ -200,7 +200,10 @@ const App = () => {
           }
         />
 
-        <Route path="/Setter" element={<Setter />} />
+        <Route
+          path="/Setter"
+          element={user?.role === "Setter" ? <Setter /> : "No access"}
+        />
       </Routes>
     </>
   );

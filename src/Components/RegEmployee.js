@@ -100,6 +100,7 @@ export const RegEmployee = () => {
           <option value="Sub">Sub</option>
           <option value="Owner">Owner</option>
           <option value="Admin">Admin</option>
+          <option value="Setter">Setter</option>
         </select>
 
         <label>Apartment:</label>
