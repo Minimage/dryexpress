@@ -87,7 +87,7 @@ const App = () => {
           Employee Login
         </Link>
         <Link className={employee != null ? "show" : "hide"} to="/AddUserQR">
-          ok
+          Add user to apartment
         </Link>
 
         {localStorage.getItem("isAuthenticated") === "true" ? (

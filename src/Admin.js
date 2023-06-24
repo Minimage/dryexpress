@@ -32,6 +32,7 @@ export const Admin = () => {
       });
   }, []);
 
+  // Gets all users and stores them in the setPeople variable
   useEffect(() => {
     Axios.get("https://dryexpress.herokuapp.com/readUser")
       .then((res) => {
