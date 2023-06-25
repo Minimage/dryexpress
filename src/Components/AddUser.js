@@ -32,7 +32,7 @@ export const AddUser = ({ employee }) => {
         try {
           await Axios.patch("https://dryexpress.herokuapp.com/usersQR", {
             userID: scanResults, // Use the scanned QR code result here
-            apartmentId: employee.apartmentId,
+            apartmentId: localStorage.getItem("ApartmentID"), // Gets apartmentID from localstorage instead of from employee
           });
         } catch (error) {
           console.error(error);
