@@ -65,6 +65,7 @@ export const Admin = () => {
           `https://dryexpress.herokuapp.com/createOrder?userId=${result}`,
           {
             userId: result,
+            apartmentID: localStorage.getItem(apartmentID),
           }
         );
       } catch (error) {
