@@ -60,6 +60,7 @@ export const Admin = () => {
       scanner.clear();
       setScanResults(result);
       setTest(result);
+      console.log(result);
 
       try {
         await Axios.post(`https://dryexpress.herokuapp.com/createOrder`, {
