@@ -80,6 +80,7 @@ export const Admin = () => {
 
   useEffect(() => {
     setApartmentID(localStorage.getItem("ApartmentID"));
+    console.log(localStorage.getItem("ApartmentID"));
     console.log("On Mount");
   }, []);
 
