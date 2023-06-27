@@ -65,7 +65,7 @@ export const Admin = () => {
 
       try {
         await Axios.post(`https://dryexpress.herokuapp.com/createOrder`, {
-          userId: result,
+          userId: "647d2f0b14d5c40832de1155",
           apartmentID: apartmentID,
         });
       } catch (error) {
