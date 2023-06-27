@@ -79,7 +79,7 @@ export const Admin = () => {
   }, []);
 
   useEffect(() => {
-    setApartmentID(localStorage.getItem("apartmentID"));
+    setApartmentID(localStorage.getItem("ApartmentID"));
   }, []);
 
   // useEffect(() => {
