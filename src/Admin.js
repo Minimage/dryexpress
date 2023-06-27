@@ -61,10 +61,11 @@ export const Admin = () => {
       setScanResults(result);
       setTest(result);
       console.log(result);
+      console.log(apartmentID);
 
       try {
         await Axios.post(`https://dryexpress.herokuapp.com/createOrder`, {
-          userId: scanResults,
+          userId: result,
           apartmentID: apartmentID,
         });
       } catch (error) {
