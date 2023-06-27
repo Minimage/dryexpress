@@ -22,8 +22,12 @@ export const Admin = () => {
   const [loginStatus, setLoginStatus] = useState(false);
   const [apartmentID, setApartmentID] = useState("");
 
+  console.log("hello");
+
   useEffect(() => {
     setApartmentID(localStorage.getItem("ApartmentID"));
+    console.log(localStorage.getItem("ApartmentID"));
+    console.log(apartmentID);
   }, []);
 
   useEffect(() => {
@@ -66,11 +70,11 @@ export const Admin = () => {
       setTest(result);
       console.log(result);
       console.log(apartmentID);
-      console.log(localStorage.getItem("ApartmentID"));
+      console.log(localStorage.getItem("apartmentID"));
       try {
         await Axios.post(`https://dryexpress.herokuapp.com/createOrder`, {
           userId: result,
-          apartmentID: "64839fb0fe296b16c9aaea6d",
+          apartmentID: apartmentID,
         });
       } catch (error) {
         console.error(error);
