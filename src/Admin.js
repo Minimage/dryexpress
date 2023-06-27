@@ -23,6 +23,10 @@ export const Admin = () => {
   const [apartmentID, setApartmentID] = useState("");
 
   useEffect(() => {
+    setApartmentID(localStorage.getItem("ApartmentID"));
+  }, []);
+
+  useEffect(() => {
     Axios.get("https://dryexpress.herokuapp.com/orders")
       .then((response) => {
         const data = response.data;
@@ -62,7 +66,7 @@ export const Admin = () => {
       setTest(result);
       console.log(result);
       console.log(apartmentID);
-
+      console.log(localStorage.getItem("ApartmentID"));
       try {
         await Axios.post(`https://dryexpress.herokuapp.com/createOrder`, {
           userId: result,
@@ -76,12 +80,6 @@ export const Admin = () => {
     function error(err) {
       console.log(err);
     }
-  }, []);
-
-  useEffect(() => {
-    setApartmentID(localStorage.getItem("ApartmentID"));
-    console.log(localStorage.getItem("ApartmentID"));
-    console.log("On Mount");
   }, []);
 
   // useEffect(() => {
