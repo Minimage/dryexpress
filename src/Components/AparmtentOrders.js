@@ -6,10 +6,12 @@ import Axios from "axios";
 export const AparmtentOrders = () => {
   useEffect(() => {
     console.log(localStorage.getItem("ApartmentID"));
-    Axios.get("/getOrderByApartmentID", {
+    Axios.post("/getOrderByApartmentID", {
       apartmentID: localStorage.getItem("ApartmentID"),
     })
-      .then((response) => {})
+      .then((response) => {
+        console.log(response);
+      })
       .catch((err) => {
         console.log(err);
       });
