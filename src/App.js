@@ -11,6 +11,7 @@ import { EmployeeLogin } from "./Components/EmployeeLogin";
 import { RegisterApparments } from "./Components/RegisterApparments";
 import { AddUser } from "./Components/AddUser";
 import { Setter } from "./Components/Setter";
+import { AparmtentOrders } from "./Components/AparmtentOrders";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -39,8 +40,6 @@ const App = () => {
     localStorage.removeItem("isAuthenticated"); // Remove authentication status from local storage
     localStorage.removeItem("userData"); // Remove user data from local storage
   };
-
-  console.log(employee);
 
   const userAuth = () => {
     Axios.get("https://dryexpress.herokuapp.com/isUserAuthenticated", {
@@ -196,6 +195,14 @@ const App = () => {
           element={
             <div>
               <AddUser employee={employee} />
+            </div>
+          }
+        />
+        <Route
+          path="/AparmtentOrders"
+          element={
+            <div>
+              <AparmtentOrders />
             </div>
           }
         />
