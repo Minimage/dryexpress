@@ -30,6 +30,14 @@ export const Admin = () => {
     console.log(apartmentID);
   }, []);
 
+  //This code isnt really being used but it helped me understand why my code wasnt working
+
+  useEffect(() => {
+    if (apartmentID != "") {
+      console.log(apartmentID);
+    }
+  }, [apartmentID]);
+
   useEffect(() => {
     Axios.get("https://dryexpress.herokuapp.com/orders")
       .then((response) => {
@@ -68,9 +76,11 @@ export const Admin = () => {
       scanner.clear();
       setScanResults(result);
       setTest(result);
+      const aptID = localStorage.getItem("apartmentID");
       console.log(result);
       console.log(apartmentID);
       console.log(localStorage.getItem("apartmentID"));
+      console.log(aptID);
       try {
         await Axios.post(`https://dryexpress.herokuapp.com/createOrder`, {
           userId: result,
@@ -84,7 +94,7 @@ export const Admin = () => {
     function error(err) {
       console.log(err);
     }
-  }, []);
+  }, [apartmentID]);
 
   // useEffect(() => {
   //   const scanner = new Html5QrcodeScanner("reader", {
@@ -179,6 +189,13 @@ export const Admin = () => {
 
   return (
     <div className="App">
+      <button
+        onClick={() => {
+          console.log(apartmentID);
+        }}
+      >
+        Check
+      </button>
       <Signup />
       <Login />
       <button>Signup</button>
