@@ -11,11 +11,37 @@ export const AparmtentOrders = () => {
       apartmentID: localStorage.getItem("ApartmentID"),
     })
       .then((response) => {
-        console.log(response.data);
+        setOrders(response.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-  return <div>AparmtentOrders</div>;
+  return (
+    <div>
+      AparmtentOrders
+      <div>
+        {orders
+          ? orders.map((order) => {
+              console.log(order);
+              return (
+                <div>
+                  <br />
+                  {order.firstName} {order.lastName}
+                  <br />
+                  {new Date(order.dateTime).toDateString()}
+                  {"  "}
+                  {new Date(order.dateTime).toLocaleString("en-US", {
+                    hour: "numeric",
+                    minute: "numeric",
+                    hour12: true,
+                  })}
+                  <br />
+                </div>
+              );
+            })
+          : ""}
+      </div>
+    </div>
+  );
 };
