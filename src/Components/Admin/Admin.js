@@ -1,7 +1,7 @@
-import "./App.css";
-import logo from "./logo.svg";
-import { Login } from "./Components/Login";
-import { Signup } from "./Components/Signup";
+import "../../App.css";
+import logo from "../../logo.svg";
+import { Login } from "../User/Login";
+import { Signup } from "../User/Signup";
 
 import Axios from "axios";
 import QRCode from "react-qr-code";

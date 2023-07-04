@@ -30,7 +30,7 @@ export const Apartments = ({ employee, data, onDataUpdate }) => {
 
   return (
     <div>
-      {userData.apartmentId != undefined ? (
+      {userData.apartmentId !== undefined ? (
         <>
           {data?.apartment.apparmentName}
           <br />
