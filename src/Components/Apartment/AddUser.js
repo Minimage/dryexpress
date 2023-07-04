@@ -1,3 +1,6 @@
+//  This component is used to scan the users QRcode and add the
+//  apartmentID to the user's document on the mongodb Database
+
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Html5QrcodeScanner } from "html5-qrcode";

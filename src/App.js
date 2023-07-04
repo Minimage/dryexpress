@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Route, Routes, Link } from "react-router-dom";
 import Axios from "axios";
-import { Login } from "./Components/Login";
+import { Login } from "./Components/User/Login";
 import { HomePage } from "./HomePage";
-import { Order } from "./Components/Order";
-import { Admin } from "./Admin";
-import { RegEmployee } from "./Components/RegEmployee";
-import { Apartments } from "./Components/Apartments";
-import { EmployeeLogin } from "./Components/EmployeeLogin";
-import { RegisterApparments } from "./Components/RegisterApparments";
-import { AddUser } from "./Components/AddUser";
-import { Setter } from "./Components/Setter";
-import { AparmtentOrders } from "./Components/AparmtentOrders";
+import { Order } from "./Components/User/Order";
+import { Admin } from "./Components/Admin/Admin";
+import { RegEmployee } from "./Components/Employee/RegEmployee";
+import { Apartments } from "./Components/Employee/Apartments";
+import { EmployeeLogin } from "./Components/Employee/EmployeeLogin";
+import { RegisterApparments } from "./Components/Admin/RegisterApparments";
+import { AddUser } from "./Components/Apartment/AddUser";
+import { Setter } from "./Components/Setter/Setter";
+import { AparmtentOrders } from "./Components/Apartment/AparmtentOrders";
 
 const App = () => {
   const [user, setUser] = useState(null);
