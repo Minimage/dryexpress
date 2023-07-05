@@ -1,3 +1,5 @@
+//Reverted Rearranging_app branch, we will need to push again
+
 import React, { useState, useEffect } from "react";
 import { Route, Routes, Link } from "react-router-dom";
 import Axios from "axios";
@@ -85,8 +87,19 @@ const App = () => {
         <Link className={user == null ? "show" : "hide"} to="/EmployeeLogin">
           Employee Login
         </Link>
-        <Link className={employee != null ? "show" : "hide"} to="/AddUserQR">
+        <Link
+          className={
+            user?.role == "Owner" || user?.role == "Sub" ? "show" : "hide"
+          }
+          to="/AddUserQR"
+        >
           Add user to apartment
+        </Link>
+        <Link
+          className={user?.role === "Driver" ? "show" : "hide"}
+          to="/driver"
+        >
+          Driver
         </Link>
 
         {localStorage.getItem("isAuthenticated") === "true" ? (
@@ -96,6 +109,37 @@ const App = () => {
         )}
       </nav>
       <Routes>
+        <Route
+
+
+
+          path="/EmployeeLogin"
+          element={
+            user?.role == null ? (
+              <EmployeeLogin
+                onLogin={handleLogin}
+                employee={employee}
+                setEmployee={setEmployee}
+                user={user}
+              />
+            ) : (
+              <div>
+                {user?.role != "User" ||
+                user?.role === "Sub" ||
+                user?.role === "Admin" ? (
+                  <Apartments
+                    employee={employee}
+                    data={data}
+                    onDataUpdate={handleDataUpdate}
+                  />
+                ) : (
+                  ""
+                )}
+              </div>
+            )
+          }
+        />
+
         <Route
           path="/"
           element={
