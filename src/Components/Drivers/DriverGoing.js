@@ -2,6 +2,7 @@ import Axios from "axios";
 import { Html5QrcodeScanner } from "html5-qrcode";
 import React, { useState, useEffect } from "react";
 
+
 export const DriverGoing = () => {
   useEffect(() => {
     const scanner = new Html5QrcodeScanner("reader", {
@@ -39,4 +40,5 @@ export const DriverGoing = () => {
       <div id="reader"></div>
     </div>
   );
+ 
 };
