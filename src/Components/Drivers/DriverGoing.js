@@ -1,5 +1,5 @@
 import React from "react";
 
-export const Driver_Going = () => {
-  return <div>Driver_Going</div>;
+export const DriverGoing = () => {
+  return <div>Scan items that are going</div>;
 };
