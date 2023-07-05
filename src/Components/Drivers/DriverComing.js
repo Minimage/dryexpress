@@ -1,5 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-export const DriverComing = () => {
+export const DriverComing = ({ showNavbar, setShowNavbar }) => {
   return <div>DriverComing</div>;
 };
