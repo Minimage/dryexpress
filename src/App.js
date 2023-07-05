@@ -94,8 +94,19 @@ const App = () => {
         <Link className={user == null ? "show" : "hide"} to="/EmployeeLogin">
           Employee Login
         </Link>
-        <Link className={employee != null ? "show" : "hide"} to="/AddUserQR">
+        <Link
+          className={
+            user?.role == "Owner" || user?.role == "Sub" ? "show" : "hide"
+          }
+          to="/AddUserQR"
+        >
           Add user to apartment
+        </Link>
+        <Link
+          className={user?.role === "Driver" ? "show" : "hide"}
+          to="/driver"
+        >
+          Driver
         </Link>
 
         {localStorage.getItem("isAuthenticated") === "true" ? (
@@ -181,7 +192,7 @@ const App = () => {
           }
         />
 
-        {/* <Route
+        <Route
           path="/"
           element={
             localStorage.getItem("isAuthenticated") === "true" ? (
@@ -295,7 +306,7 @@ const App = () => {
         <Route
           path="/Setter"
           element={user?.role === "Setter" ? <Setter /> : "No access"}
-        /> */}
+        />
       </Routes>
     </>
   );
