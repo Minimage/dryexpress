@@ -12,33 +12,26 @@ import { RegisterApparments } from "./Components/Admin/RegisterApparments";
 import { AddUser } from "./Components/Apartment/AddUser";
 import { Setter } from "./Components/Setter/Setter";
 import { AparmtentOrders } from "./Components/Apartment/AparmtentOrders";
-import { Driver } from "./Components/Drivers/Driver";
-import { DriverGoing } from "./Components/Drivers/DriverGoing";
-import { DriverComing } from "./Components/Drivers/DriverComing";
-import { Status } from "./Components/Drivers/Status";
 
 const App = () => {
   const [user, setUser] = useState(null);
   const [employee, setEmployee] = useState(null);
 
   const [data, setData] = useState(null);
-  const [showNavbar, setShowNavbar] = useState(true);
 
   const handleDataUpdate = (newData) => {
     setData(newData);
   };
+
   const handleLogin = (userData) => {
     setUser(userData);
-    localStorage.setItem("isAuthenticated", "true");
-    localStorage.setItem("userData", JSON.stringify(userData));
+    localStorage.setItem("isAuthenticated", "true"); // Set authentication status in local storage
+    localStorage.setItem("userData", JSON.stringify(userData)); // Store user data in local storage
     const userDataString = localStorage.getItem("userData");
     const myData = JSON.parse(userDataString);
-
-    //   if (myData.role === "Driver") {
-    //     setShowNavbar(false);
-    //   } else {
-    //     setShowNavbar(true);
-    //   }
+    // setEmployee({
+    //   apartmentId: myData.apartmentId,
+    // });
   };
 
   const handleLogout = () => {
@@ -102,84 +95,8 @@ const App = () => {
           ""
         )}
       </nav>
-
       <Routes>
-        {/*Owner*/}
-        {user?.role === "Owner" ? (
-          <Route
-            path="/"
-            element={
-              localStorage.getItem("isAuthenticated") === "true" ? (
-                <HomePage user={user} onLogout={handleLogout} />
-              ) : (
-                ""
-              )
-            }
-          />
-        ) : (
-          ""
-        )}
-
-        {/*Driver*/}
-        {user?.role === "Driver" ? (
-          <Route
-            path="/Driver"
-            element={
-              localStorage.getItem("isAuthenticated") === "true" ? (
-                <Driver showNavbar={showNavbar} setShowNavbar={setShowNavbar} />
-              ) : (
-                ""
-              )
-            }
-          >
-            <Route
-              path="Going"
-              element={
-                <DriverGoing
-                  showNavbar={showNavbar}
-                  setShowNavbar={setShowNavbar}
-                />
-              }
-            />
-            <Route
-              path="Coming"
-              element={<DriverComing showNavbar={showNavbar} />}
-            />
-            <Route path="Status" element={<Status showNavbar={showNavbar} />} />
-          </Route>
-        ) : (
-          ""
-        )}
-
         <Route
-          path="/EmployeeLogin"
-          element={
-            user?.role == null ? (
-              <EmployeeLogin
-                onLogin={handleLogin}
-                employee={employee}
-                setEmployee={setEmployee}
-                user={user}
-              />
-            ) : (
-              <div>
-                {user?.role != "User" ||
-                user?.role === "Sub" ||
-                user?.role === "Admin" ? (
-                  <Apartments
-                    employee={employee}
-                    data={data}
-                    onDataUpdate={handleDataUpdate}
-                  />
-                ) : (
-                  ""
-                )}
-              </div>
-            )
-          }
-        />
-
-        {/* <Route
           path="/"
           element={
             localStorage.getItem("isAuthenticated") === "true" ? (
@@ -293,7 +210,7 @@ const App = () => {
         <Route
           path="/Setter"
           element={user?.role === "Setter" ? <Setter /> : "No access"}
-        /> */}
+        />
       </Routes>
     </>
   );
