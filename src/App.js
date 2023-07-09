@@ -26,6 +26,8 @@ const App = () => {
   const [data, setData] = useState(null);
   const [showNavbar, setShowNavbar] = useState(true);
 
+  const [driver, setDriver] = useState(null);
+
   const handleDataUpdate = (newData) => {
     setData(newData);
   };
@@ -34,6 +36,7 @@ const App = () => {
     localStorage.setItem("isAuthenticated", "true");
     localStorage.setItem("userData", JSON.stringify(userData));
     const userDataString = localStorage.getItem("userData");
+    setDriver(JSON.parse(userDataString).apartmentId);
     const myData = JSON.parse(userDataString);
 
     //   if (myData.role === "Driver") {
@@ -45,9 +48,13 @@ const App = () => {
 
   const handleLogout = () => {
     setUser(null);
+    setDriver(null);
+
     localStorage.removeItem("token");
     localStorage.removeItem("isAuthenticated"); // Remove authentication status from local storage
     localStorage.removeItem("userData"); // Remove user data from local storage
+    localStorage.removeItem("DriverApartment");
+    window.location.reload();
   };
 
   const userAuth = () => {
@@ -70,17 +77,43 @@ const App = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const isAuthenticated = localStorage.getItem("isAuthenticated"); // Get authentication status from local storage
-    const storedUserData = localStorage.getItem("userData"); // Get user data from local storage
+    const isAuthenticated = localStorage.getItem("isAuthenticated");
+    const storedUserData = localStorage.getItem("userData");
+
+    if (user?.role === "Driver") {
+      console.log(user);
+
+      const apartmentId = JSON.parse(
+        localStorage.getItem("userData")
+      )?.apartmentId;
+      setDriver(apartmentId);
+      localStorage.setItem("DriverApartment", apartmentId);
+    } else {
+      console.log("User is not a driver");
+    }
 
     if (token && isAuthenticated) {
       if (storedUserData) {
-        setUser(JSON.parse(storedUserData)); // Set the user data from local storage
+        setUser(JSON.parse(storedUserData));
       } else {
-        userAuth(); // Retrieve user data from the backend if not available in local storage
+        userAuth();
       }
     }
   }, []);
+
+  useEffect(() => {
+    if (user?.role === "Driver" && driver) {
+      localStorage.setItem("DriverApartment", driver);
+      console.log("driver", driver);
+    }
+  }, [driver]);
+
+  // useEffect(() => {
+  //   if (user?.role === "Driver") {
+  //     localStorage.setItem("DriverApartment", driver);
+  //     console.log("driver", driver);
+  //   }
+  // }, [driver]);
 
   return (
     <>
